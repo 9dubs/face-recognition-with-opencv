@@ -6,7 +6,7 @@ people = ['Elon Musk', 'Jeff Bezos', 'Kamala Harris', 'Leonardo DiCaprio', 'Nare
 
 DIR = r'C:/Users/msi/Python/opencv/faces'
 
-haar = cv.CascadeClassifier('C:/Users/msi/Python/opencv/faceDetect.xml')
+haar = cv.CascadeClassifier('faceDetect.xml')
 
 features = []
 labels = []
@@ -31,6 +31,9 @@ def create_train():
 create_train()
 
 print('training done----------------------')
+
+
+
 
 features = np.array(features, dtype='object')
 labels = np.array(labels)
