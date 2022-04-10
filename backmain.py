@@ -8,7 +8,7 @@ people = ['Elon Musk', 'Jeff Bezos', 'Kamala Harris', 'Leonardo DiCaprio', 'Nare
 #labels = np.load('labels.npy')
 
 def markAttendance(name):
-    with open('C:/Users/msi/Python/opencv/Attendance.csv', 'r+') as f:
+    with open('Attendance.csv', 'r+') as f:
         # Now we read all the lines in our data
         # If somebody is already arrived we don't want to repeat it
         myDataList = f.readlines()
@@ -26,7 +26,7 @@ def markAttendance(name):
             dtString = now.strftime('%H:%M:%S')
             f.writelines(f'\n{name},{dtString}')
 
-haar = cv.CascadeClassifier('C:/Users/msi/Python/opencv/faceDetect.xml')
+haar = cv.CascadeClassifier('faceDetect.xml')
 
 face_recognizer = cv.face.LBPHFaceRecognizer_create()
 face_recognizer.read('face_trained.yml')
@@ -40,13 +40,15 @@ while True:
     
     gray = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
 
-    faceD = cv.CascadeClassifier('C:/Users/msi/Python/opencv/faceDetect.xml')
+    faceD = cv.CascadeClassifier('faceDetect.xml')
     detect = faceD.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=2)
     namelist =[]
 
     for (x,y,w,h) in detect:
         roi = gray[y:y+h, x:x+w]
         label, confidence = face_recognizer.predict(roi)
+        name = str(people[label])
+
         if confidence > 80:
             name = str(people[label])
             cv.putText(frame, name, (20,30), cv.FONT_HERSHEY_COMPLEX, 1.0, (0,255,0), 2)
