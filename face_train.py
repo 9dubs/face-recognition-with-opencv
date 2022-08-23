@@ -11,6 +11,7 @@ haar = cv.CascadeClassifier('faceDetect.xml')
 features = []
 labels = []
 
+# first commit
 def create_train():
     for person in people:
         path = os.path.join(DIR, person)
